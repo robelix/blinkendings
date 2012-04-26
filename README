@@ -1,0 +1,10 @@
+# Blinkendings
+
+diverses Zeug für unsere Blinkenwall
+
+
+Benötigt arduino Tlc5940 library 
+http://code.google.com/p/tlc5940arduino/
+
+have fun,
+robelix
