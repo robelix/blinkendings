@@ -6,5 +6,23 @@ diverses Zeug für unsere Blinkenwall
 Benötigt arduino Tlc5940 library 
 http://code.google.com/p/tlc5940arduino/
 
+Die Anzahl der TLC5940 chips setzt man im tlc_config.h
+
+
+Unter arduino/ gibt's etwas code:
+* BasicUsergb - Example Lauflicht auf RGB
+* FadeScope3  - Nochmal ziemlich das Selbe mit 8 Farben
+* randomtlc   - completely random 
+
+* serialtest  - pixel setzen über USB/Serial
+* senpng.pl   - dazu passender script, der Bilddaten sendet
+
+
+Und in eagle/ die Layouts:
+tlc-smd    - die existierenden Platinen
+tlcbuffer  - die Buffer-boards
+tlc-smd-v2 - Beides zusammen - mit noch etwas Optimierungsbedarf
+
+
 have fun,
 robelix
