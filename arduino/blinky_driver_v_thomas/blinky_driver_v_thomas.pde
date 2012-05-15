@@ -1,5 +1,6 @@
 #include "Tlc5940.h"
 
+
 void setup()
 {
   /* Call Tlc.init() to setup the tlc.
@@ -21,10 +22,12 @@ class Board
     static const int maxLeds = 16;
     int tlcStartAddress;
     int lastLedSet;
+    boolean rotated;
     
 public:
-   Board()
+   Board(boolean rotiert=false)
    {
+      rotated = rotiert;
       tlcStartAddress = Board_boards * 48;
       Serial.println(tlcStartAddress);
       Board_boards++;
@@ -44,10 +47,13 @@ public:
    inline void setLed(int led, int r, int g, int b)
    {
        led = led % maxLeds;
+       lastLedSet = led;
+       if (rotated) {
+         led = 15-led;
+       }
        Tlc.set(tlcStartAddress + led*3, r); // led rot
        Tlc.set(tlcStartAddress + led*3 + 1, g); // led GRÜN
        Tlc.set(tlcStartAddress + led*3 + 2, b); // led BLAU
-       lastLedSet = led;
    };
    
    inline int lastLed()
@@ -80,13 +86,16 @@ public:
    };
 };
 
-Board board[9] = { Board(), Board(), Board(), Board(), Board(), Board(), Board(), Board(), Board() };
+
+#define NR_BOARDS 8
+Board board[NR_BOARDS] = { Board(), Board(), Board(), Board(), Board(true), Board(true), Board(true), Board(true) };
+
 
 int spiralMap[16] = { 1, 2, 3, 7, 5, 6, 10, 11, 4, 0, 9, 15, 8, 12 ,13 ,14 };
 
 int next(int last)
 {
-  return spiralMap[last];
+  return last+3;
 }
 
 void loop()
@@ -101,7 +110,7 @@ void loop()
      c[r] = (c[r]+3333)%4096; 
   }
   
-   for(unsigned int i=0;i<9;i++)
+   for(unsigned int i=0;i<NR_BOARDS;i++)
    {
         //reset prev board to 0 ... 
         //board[(i-1)%9].setColor(0,0,0);
