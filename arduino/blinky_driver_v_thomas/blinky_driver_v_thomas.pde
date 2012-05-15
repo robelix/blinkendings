@@ -7,7 +7,9 @@ void setup()
      You can optionally pass an initial PWM value (0 - 4095) for all channels.*/
   Tlc.init();
   Serial.begin(9600);
-        Serial.println("RESET");
+  Serial.println("RESET");
+  
+  pinMode(A0, INPUT);
 }
 
 /* This loop will create a Knight Rider-like effect if you have LEDs plugged
@@ -56,6 +58,8 @@ public:
        Tlc.set(tlcStartAddress + led*3 + 2, b); // led BLAU
    };
    
+   //inline void setLedXY(int x, 
+   
    inline int lastLed()
     {
       return lastLedSet;
@@ -98,13 +102,15 @@ int next(int last)
   return last+3;
 }
 
+double ran=100;
+
 void loop()
 {
   int x = 1024;
   
   static int c[3]={2048,0,0};
   
-  if(random()%5==0)
+  if(random()%25==0)
   {
      int r = random()%3;
      c[r] = (c[r]+3333)%4096; 
@@ -117,12 +123,19 @@ void loop()
         
         //board[i].setColor(random()%x,random()%x,random()%x);
         //board[i].effectTest(random()%x,random()%x,random()%x,300);
-        board[i].setLed(board[i].lastLed(),25,25,25);
+        board[i].setLed(board[i].lastLed(),c[0]/25,c[1]/25,c[2]/25);
         board[i].setLed(next(board[i].lastLed()),c[0],c[1],c[2]);
         //board[i].setLed(random()%16,0,0,0);
         Tlc.update();
-        delay(10);
    }
+   double poti = analogRead(A0);
+   if (random(1) ==0) {
+     ran++;
+   } else {
+     ran--;
+   }
+   
+   delayMicroseconds(poti*ran);
 }
 
 
