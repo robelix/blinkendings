@@ -29,6 +29,7 @@ loop()
         blinkenWall.drawAnimation(&itssyndikat, 0, 0, 0, frame++);
         if (frame > 2)
             frame = 0;
+        blinkenWall.update();
     }
 }
 
