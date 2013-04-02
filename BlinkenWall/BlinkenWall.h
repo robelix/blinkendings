@@ -32,6 +32,40 @@ static const char trans_mat[8][12] =
 	{12, 13, 14, 15, 60, 61, 62, 63, 76, 77, 78, 79}
 };
 
+
+/*
+ * struct animation
+ * This struct is used to define a simple animation
+ * members:
+ *		- num_frames ... number of frames of the animation
+ *		- len_x, len_y .... size of the sprite
+ *		- frames ... pointer to the sprite information (details see below)
+ *		- color ... pointer to a color information for the sprite
+ *
+ * frames:
+ * 		- allowed numbers 0-255
+ *		- each frame is represented by a power of 2:
+ *			+ 0 ... no color at all (transparent)
+ *			+ 1 ... first frame
+ *			+ 2 ... second frame
+ *			+ 4 ... third frame
+ *			...
+ *			+ 128 ... eight frame
+ *
+ *			if a pixel should be displayed in multiple frames, the
+ *			number of occuring frames must be summed
+ *			e.g. 1st and 3rd frame = 1 + 4 = 5
+ *			     2nd, 3rd, 4th, and 5th frame = 2 + 4 + 8 + 16 = 30
+ * color:
+ *		- each pixel can have a 3 * 8 bit color information
+ *		- red: 0xFF0000
+ *		- green: 0x00FF00
+ *		- blue: 0x0000FF
+ *		- every other color is in the format 0xRRGGBB -> RR ... red part
+ *								 GG ... green part
+ *								 BB ... blue part
+ */
+
 struct animation {
 	int num_frames;
 	int len_x;

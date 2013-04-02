@@ -2,6 +2,19 @@
 2) reopen Arduino IDE
 3) import library
 
+
+This library depends on the TI Tlc5940 library.
+For installation instructions please visit
+
+http://playground.arduino.cc/learning/TLC5940
+
+newer version might require other and/or additional
+header-files to be included.
+
+
+For more information on how to create a animation
+please read the comments in BlinkenWall.h
+
 example programm
 
 this will constantly draw the ITS logo to the wall
