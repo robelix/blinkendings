@@ -76,19 +76,23 @@ struct animation {
 
 class BlinkenWall {
 public:
-	BlinkenWall(int delay);
+	BlinkenWall(int delay, uint32_t bg_color);
 	void setup();
 	void drawAnimation(struct animation *ani, int xoffset, int yoffset, int zoffset, int frame);
 	void update();
 	void update(int delay);
 	void clear();
 	uint32_t *createColor(uint32_t pattern, int lenx, int leny);
+	void drawPoint(int x, int y, int z, uint32_t color);
+	void setBackGround(uint32_t color);
 private:
+	void draw_raw(int pos, uint32_t color);
 	void updateWall(TLC_CHANNEL_TYPE pos, uint16_t r, uint16_t g, uint16_t b);
 	int transform(int pos);
 private:
-	unsigned char zbuffer[8][12];
 	int delay;
+	uint32_t background;
+	unsigned char zbuffer[8][12];
 };
 
 #endif /* __BLINKENWALL_H */
