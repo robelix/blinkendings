@@ -26,7 +26,8 @@ this will constantly draw the ITS logo to the wall
 #include "BlinkenWall.h"
 #include "Animations.h"
 
-BlinkenWall blinkenWall(150);
+/* delay 150 ms, black default background */
+BlinkenWall blinkenWall(150, 0);
 
 void
 setup()
@@ -43,6 +44,7 @@ loop()
         if (frame > 2)
             frame = 0;
         blinkenWall.update();
+        blinkenWall.clear();
     }
 }
 
