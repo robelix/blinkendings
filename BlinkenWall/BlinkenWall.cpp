@@ -36,6 +36,11 @@ BlinkenWall::update(int del)
 	Tlc.update();
 	::delay(del);
 }
+void
+BlinkenWall::setBackGround(uint32_t color)
+{
+	background = color;
+}
 
 void
 BlinkenWall::drawAnimation(struct animation *ani, int xoffset, int yoffset, int zoffset, int frame)
@@ -92,9 +97,9 @@ BlinkenWall::draw_raw(int pos, uint32_t color)
 		return;
 	uint16_t r,g,b;
 	int rpos = transform(pos);
-	r = (uint16_t)(((colval & 0x00FF0000) >> 16) << MAX_COLOR_VAL);
-	g = (uint16_t)(((colval & 0x0000FF00) >> 8) << MAX_COLOR_VAL);
-	b = (uint16_t)(((colval & 0x000000FF)) << MAX_COLOR_VAL);
+	r = (uint16_t)(((color & 0x00FF0000) >> 16) << MAX_COLOR_VAL);
+	g = (uint16_t)(((color & 0x0000FF00) >> 8) << MAX_COLOR_VAL);
+	b = (uint16_t)(((color & 0x000000FF)) << MAX_COLOR_VAL);
 	updateWall(rpos, r, g, b);
 }
 

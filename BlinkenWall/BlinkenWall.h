@@ -84,6 +84,7 @@ public:
 	void clear();
 	uint32_t *createColor(uint32_t pattern, int lenx, int leny);
 	void drawPoint(int x, int y, int z, uint32_t color);
+	void setBackGround(uint32_t color);
 private:
 	void draw_raw(int pos, uint32_t color);
 	void updateWall(TLC_CHANNEL_TYPE pos, uint16_t r, uint16_t g, uint16_t b);
